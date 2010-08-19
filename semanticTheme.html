@@ -1,445 +1,214 @@
 <!DOCTYPE html>
-<!-- SemanticTheme for Tumblr by Mike Hudack  -->
-<!-- In GitHub at http://github.com/mhudack/semantictheme -->
+<!--
+   ____    __                                      ____      __      ____      
+  /\  _`\ /\ \                                    /\  _`\   /\ \    /\  _`\    
+  \ \ \L\ \ \ \____    ___     ___     ___ ___    \ \ \L\ \ \_\ \___\ \ \/\ \  
+   \ \ ,  /\ \ '__`\  / __`\  / __`\ /' __` __`\   \ \ ,  //\___  __\\ \ \ \ \ 
+    \ \ \\ \\ \ \L\ \/\ \L\ \/\ \L\ \/\ \/\ \/\ \   \ \ \\ \/__/\ \_/ \ \ \_\ \
+     \ \_\ \_\ \_,__/\ \____/\ \____/\ \_\ \_\ \_\   \ \_\ \_\ \ \_\   \ \____/
+      \/_/\/ /\/___/  \/___/  \/___/  \/_/\/_/\/_/    \/_/\/ /  \/_/    \/___/ 
+  
+  
+  ########################################################################################################
 
+  Modified version of SemanticTheme for Tumblr by Mike Hudack (http://github.com/mhudack/semantictheme)
+
+  Released under a GPL license by Rocketboom. More info: http://www.gnu.org/licenses/gpl.html
+  http://dev.rocketboom.com  |  @RocketboomDev  |  http://github.com/rocketboom
+
+-->
 <html lang="en" dir="ltr">
-	<head>
-		<title>{Title}</title>
-		<meta charset="utf-8" />
-		<link rel="shortcut icon" href="{Favicon}">
-		<link rel="alternate" type="application/rss+xml" href="{RSS}">
-		
-		<!-- Meta -->
-        {block:Description}
-            <meta name="description" content="{MetaDescription}" />
-        {/block:Description}
+  <head>
+    <meta charset="utf-8" />
+    {block:IndexPage}
+      <title>{Title}</title>
+      <meta name="description" content="{MetaDescription}" />
+    {/block:IndexPage}
+    {block:PostSummary}
+      <title>{PostSummary}</title>
+    {/block:PostSummary}
+    <link rel="shortcut icon" href="{Favicon}">
+    <link rel="alternate" type="application/rss+xml" href="{RSS}">
+    <meta name="text:Google Analytics Code" content="" />
+    <meta name="text:Projects List" content="" />
+    <meta name="text:More Info" content="" />
+    <meta name="text:Footer" content="" />
+    <link rel="stylesheet" href="http://rbcdn.com/rbdev/blog/style.css" />
+    <style type="text/css" media="screen, handheld, print">
+      {CustomCSS}
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <header id="header">
+        <hgroup>
+          <h1><a href="/">{Title}</a></h1>
+          <h3>{Description}</h3>
+        </hgroup>
+      </header>
+    
+      <div id="cols" class="c">
+        <div id="posts" class="left">
+          {block:Posts}
+            <article id="{PostID}" class="post {TagsAsClasses} {block:Text}text{/block:Text}{block:Photo}photo{/block:Photo}{block:Photoset}photoset{/block:Photoset}{block:Quote}quote {Length}{/block:Quote}{block:Link}link{/block:Link}{block:Chat}chat{/block:Chat}{block:Audio}audio{/block:Audio}{block:Video}video{/block:Video}{block:Answer}answer{/block:Answer}">
         
-        <!-- Dojo seems cool -->
-		<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.4/dojo/dojo.xd.js" type="text/javascript" djConfig="parseOnLoad: true"></script>
-		<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.4/dijit/themes/nihilo/nihilo.css" />
-		
-		<!-- for the Internet Exploder -->
-		<!--[if lt IE 9]>
-		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-		
-		<!-- Tumblr customization cues -->
-		<meta name="font:Title" content="Helvetica, Verdana, sans-serif" />
-		<meta name="font:Body" content="Helvetica, Verdana, sans-serif" />
-		<meta name="color:Background" content="#fff" />
-		<meta name="color:Text" content="#000" />
-		<meta name="color:link" content="#336699" />
-		<meta name="color:visitedLink" content="#663366" />
-		<meta name="text:Google Analytics Code" content="" />
-		
-		<!-- End Tumblr customization cues -->
-        
-        <script type="text/javascript">
-        
-        	window.onload = function() {
-        		colorQuotes();
-        	}
-        
-        	dojo.require("dijit.Dialog");
-        
-        	function showNotes(url,title) {        		
-        		dojo.xhrGet({
-        			url: url,
-        			load: function(data) {
-						var myDialog = new dijit.Dialog({
-							title: "Notes for " + title,
-							content: data,
-						});
-						myDialog.show();
-						window.blur();
-        				}
-        		});
-        		        		
-        		return false;
-        		
-        	}
-        	
-        	function colorQuotes() {
-        	
-				var blocks = document.getElementsByTagName('blockquote');
-				
-				for(var i = 0; i < blocks.length; i++) {
-					// Get our parent element so we can see if we have a credit associated with us
-					var parent = blocks[i].parentElement;
-					// loop through siblings
-					for(var ii = 0; ii < parent.children.length; ii++) {
-						// See if any of our siblings are paragraphs
-						if(parent.children[ii] == '[object HTMLParagraphElement]') {
-							for(var iii = 0; iii < parent.children[ii].children.length; iii++) {
-								var e = parent.children[ii].children[iii];
-								// test for link
-								if(e.href) {
-									// Get blockquote border color
-									var color = document.defaultView.getComputedStyle(blocks[i],null).getPropertyValue('border-left-color');
-									// Set it and forget it if it's got a colon at the end
-								
-									if(e.parentElement.innerHTML.match(/:$/)) {
-										e.style.color = color;
-									}
-								}
-							}
-						}
-					}
-				}
-			}
+              {block:Text}
+                <header>
+                  <h1>{Title}</h1>
+                </header>
+                <section class="body">
+                  {Body}
+                  {block:More}<p class="more"><a href="{Permalink}">{lang:Read more} &hellip;</a></p>{/block:More}
+                </section>
+              {/block:Text}
+          
+              {block:Photo}
+                <section class="photo">
+                  {block:HighRes}<a href="{PhotoURL}">{/block:HighRes}
+                  {LinkOpenTag}<img src="{PhotoURL-500}" alt="{PhotoAlt}" />{LinkCloseTag}
+                  {block:HighRes}</a>{/block:HighRes}
+                </section>
+                {block:Caption}
+                  <section class="caption">
+                    {Caption}
+                  </section>
+                {/block:Caption}
+              {/block:Photo}
+          
+              {block:Photoset}
+                <!-- It's annoying that Tumblr has different blocks for photos and photosets, they shouldn't be different -->
+                <section class="photoset">{Photoset-500}</section>
+            
+                {block:Caption}
+                  <section class="caption">
+                    {Caption}
+                  </section>
+                {/block:Caption}
+              {/block:Photoset}
+          
+              {block:Quote}
+                <section class="quote">
+                  <q>{Quote}</q>
+                </section>
+            
+                {block:Source}
+                  <section class="citation">
+                    {Source}
+                  </section>
+                {/block:Source}
+              {/block:Quote}
+                    
+              {block:Link}
+                <header>
+                  <a rel="external" href="{URL}" {Target}>{Name}</a>
+                </header>
+            
+                {block:Description}
+                  <section>
+                    {Description}
+                  </section>
+                {/block:Description}
+              {/block:Link}
+          
+              {block:Chat}
+                <header>
+                  <h1><a rel="bookmark" href="{Permalink}">{Title}</a></h1>
+                </header>
+            
+                {block:Lines}
+                <dialog>
+                  {block:Label}
+                  <dt>{Label}</dt>
+                  {/block:Label}
+                  <dd>{Line}</dd>
+                </dialog>
+                {/block:Lines}              
+              {/block:Chat}
+          
+              {block:Video}
+                <section class="video">{Video-500}</section>
+            
+                {block:Caption}
+                <section>
+                  {Caption}
+                </section>
+                {/block:Caption}
+              {/block:Video}
+          
+              {block:Audio}
+                <section class="audio">{AudioPlayerBlack}</section>
+            
+                {block:Caption}
+                  <section>
+                    {Caption}
+                  </section>
+                {/block:Caption}
+              {/block:Audio}
 
-        </script>
-        
-		<style type="text/css" media="screen, handheld, print">
-			body {
-				background-color: {color:Background};
-				color: {color:text};
-				margin-left: auto;
-				margin-right: auto;
-				font-size: 9pt;
-				font-family: {font:Body};
-				width: 500px;
-				padding-bottom: 40px;
-				line-height: 1.4;
-			}
-			
-			img { 
-				border: 0px;
-			}
-			
-			a:link {
-				color: {color:Link}
-			}
-			
-			a:visited {
-				color: {color:visitedLink}
-			}
-			
-			.digitDialog {
-				background-color: #000;
-			}
-						
-			header h1 {
-				font-family: {font:Title};
-				font-weight: 800;
-				font-size: 350%;
-				display: inline;
-				margin-right: 10px;
-				line-height: 0.9;
-			}
-			
-			header #description {
-				font-size: 110%;
-				display: inline;
-			}
-			
-			header h1 a, header h1 a:visited {
-				text-decoration: none;
-				color: black;
-			}
-			
-			body header {
-				display: block;
-				border-bottom: 1px solid #eee;
-				margin-top: 10px;
-				padding-bottom: 10px;
-				margin-bottom: 10px;
-				width: 500px;
-			}
-			
-			article header h1, article header a, article header a:visited {
-				font-weight: 800;
-				font-size: 150%;
-			}
-			
-			
-			#articles {
-				width: 500px;
-				margin-top: 50px;
-			}
-			
-			article { 
-				display: block;
-				border-bottom: 1px solid #999;
-				margin-bottom: 40px;
-			}
-			
-			article header {
-				border: 0px;
-			}
-			
-			article footer {
-				display: block;
-				margin-top: 5px;
-				margin-bottom: 5px;
-				font-size: 80%;
-				line-height: 180%;
-				width: 100%;
-			}
-			
-			article div {
-				margin-top: 5px;
-				margin-bottom: 15px;
-			}
-			
-			/**
-				Really annoying that sometimes first element in a citation is a p, sometimes it's an a.  Who's generating this markup?
-			*/
-			article div.citation > p:first-child:before {		
-				content: '\21AA\0205F' 
-			}
-			
-			article div.citation > a:first-child:before {		
-				content: '\21AA\0205F' 
-			}
-			
-			article div.citation {
-				margin-left: 20px;
-			}
-												
-			article dt {
-				font-weight: 700;
-			}
-			
-			blockquote {
-				border-left: 3px solid #8B8989;
-				padding-left: 5px;
-			}
-												
-			blockquote blockquote {
-				border-left: 3px solid #858977;
-			}
-			
-			blockquote blockquote blockquote {
-				border-left: 3px solid #7F8966;
-			}
-			
-			blockquote blockquote blockquote blockquote {
-				border-left: 3px solid #7A8A55;
-			}
-			
-			blockquote blockquote blockquote blockquote blockquote {
-				border-left: 3px solid #748A44;
-			}
-			
-			blockquote blockquote blockquote blockquote blockquote blockquote {
-				border-left: 3px solid #6E8A33;
-			}
-			
-			blockquote blockquote blockquote blockquote blockquote blockquote blockquote {
-				border-left: 3px solid #698B22;
-			}
-			
-			footer nav a {
-				font-size: 150%;
-			}
-			
-			footer nav a.previous {
-				position: relative;
-				
-			}
-			
-			footer nav a.next {
-				float: right;
-			}
-			
-			footer nav a.previous:before {
-				content: '\021A4\0205F'
-			}
-			
-			footer nav a.next:after {
-				content: '\0205F\021A6'
-			}
+              {block:Answer}
+               <section class="question c">
+                <div class="avatar left"><img src="{AskerPortraitURL-64}" alt="" title="{Asker}" /></div>
+                <div class="asked_question right">
+                 <span>{lang:Asker asked}:</span>
+                 {Question}
+                </div>
+               </section>
+               <section class="answer">{Answer}</section>
+              {/block:Answer}
 
-			footer nav {
-				margin-bottom: 40px;
-			}
-			
-			footer #search {
-				border-top: 1px solid #eee;
-				margin-top: 30px;
-				margin-bottom: 10px;
-			}
-			
-			footer #search input.search {
-				margin-top: 30px;
-				width: 250px;
-			}
-			
-			footer div.credit {
-				margin-top: 30px;
-				border-top: 1px solid #eee;
-				font-size: 90%;
-			}
-			
-			.clear {
-				clear: both;
-			}
-			
-			{CustomCSS}
 
-		</style>
-	</head>
-	<body class="nihilo">
-		<header>
-			<h1><a href="/">{Title}</a></h1>
-			<span id="description">{Description}</span>
-		</header>
-		
-		<div id="articles">
-			{block:Posts}
-				<article>
-				
-					{block:Text}
-						<header>
-							<h1>{Title}</h1>
-							
-						</header>
-						<div>
-							{Body}
-						</div>
-					{/block:Text}
-					
-					{block:Photo}
-						{block:HighRes}<a href="{PhotoURL}">{/block:HighRes}
-						{LinkOpenTag}<img src="{PhotoURL-500}" alt="{PhotoAlt}" />{LinkCloseTag}
-						{block:HighRes}</a>{/block:HighRes}
-						
-						{block:Caption}
-							<!-- caption in HTML5 is a serious ommission -->
-							<div class="caption">
-								{Caption}
-							</div>
-						{/block:Caption}
-					{/block:Photo}
-					
-					{block:Photoset}
-						<!-- It's annoying that Tumblr has different blocks for photos and photosets, they shouldn't be different -->
-						{Photoset-500}
-						
-						{block:Caption}
-							<!-- caption in HTML5 is a serious ommission -->
-							<div class="caption">
-								{Caption}
-							</div>
-						{/block:Caption}
-					{/block:Photoset}
-					
-					{block:Quote}
-						<q>{Quote}</q>
-						
-						{block:Source}
-							<!-- Tumblr should distinguish between source and commentary -->
-							<!-- HTML5 has a cite element but it's not appropriate in this case - http://www.w3.org/TR/html5/text-level-semantics.html#the-cite-element -->
-							<div class="citation">
-								{Source}
-							</div>
-						{/block:Source}
-					{/block:Quote}
-										
-					{block:Link}
-						<header>
-							<a href="{URL}" {Target}>{Name}</a>
-						</header>
-						
-						{block:Description}
-							<div>
-								{Description}
-							</div>
-						{/block:Description}
-					{/block:Link}
-					
-					{block:Chat}
-						<header>
-							<h1>{Title}</h1>
-						</header>
-						
-						{block:Lines}
-						<!-- the dialog element is way cool -->
-						<dialog>
-							{block:Label}
-							<dt>{Label}</dt>
-							{/block:Label}
-							<dd>{Line}</dd>
-						</dialog>
-						{/block:Lines}							
-					{/block:Chat}
-					
-					{block:Video}
-						{Video-500}
-						
-						{block:Caption}
-						<div>
-							{Caption}
-						</div>
-						{/block:Caption}
-					{/block:Video}
-					
-					{block:Audio}
-						{AudioPlayerBlack}
-						
-						{block:Caption}
-							<div>
-								{Caption}
-							</div>
-						{/block:Caption}
-					{/block:Audio}
-															
-					{block:PostNotes} 
-					
-						<h3>Notes about this post from the Tumblr community:</h3>
-					
-						{PostNotes}
-					
-					{/block:PostNotes} 
-					
-					<footer>
-						Posted to this Tumblr on <a href="{Permalink}" rel="bookmark"><time>{Month} {DayOfMonth}, {Year}</time></a>.  {block:NoteCount}<a href="{Permalink}" onclick="return showNotes('{PostNotesURL}','post #{PostID}');">{NoteCountWithLabel}</a> 
-						
-						{block:Audio}
-							and {PlayCountWithLabel}  
-						{/block:Audio}
-						
-						accumulated.{/block:NoteCount}
-						
-						{block:RebloggedFrom} 
-							<br />
-							<b>Please Note: </b> The above is a <a href="http://www.tumblr.com/docs/en/dashboard">reblog</a> that originated on <cite><a href="{ReblogRootURL}">{ReblogRootTitle}</a></cite>. I may not agree with it.
-						{/block:RebloggedFrom}
-					</footer>
-				</article>
+          
+              <details>
+                {block:PostNotes}
+                  <summary id="notes">
+                    <h3>Notes about this post from the Tumblr community:</h3>
+                    {PostNotes}
+                  </summary>
+                {/block:PostNotes} 
+          
+                <footer>
+                  <p>
+                    Posted on <a href="{Permalink}" rel="bookmark"><time>{Month} {DayOfMonth}, {Year}</time></a>.  {block:NoteCount}<a href="{Permalink}" rel="bookmark" onclick="return showNotes('{PostNotesURL}','post #{PostID}');">{NoteCountWithLabel}</a> {block:Audio} and {PlayCountWithLabel}{/block:Audio} accumulated.{/block:NoteCount}
+                    {block:RebloggedFrom} 
+                      <br /><a href="http://www.tumblr.com/docs/en/dashboard">Reblogged</a> from <cite><a href="{ReblogRootURL}">{ReblogRootTitle}</a></cite>.
+                    {/block:RebloggedFrom}
+                 </p>
+                </footer>
+              </details>
+            </article>
 
-			
-			{/block:Posts}
-		</div> <!-- end #articles div -->
-		
-		<footer>
-			<nav>
-				{block:PreviousPage}
-					<a href="{PreviousPage}" class="previous" rel="prev">Previous Page</a>
-				{/block:PreviousPage}
-				
-				{block:NextPage}
-					<a href="{NextPage}" class="next" rel="next">Next Page</a>
-				{/block:NextPage}
-			</nav>
-			
-			<div class="clear"></div>
-			
-			<div id="search">
-				<form action="/search" method="get">
-    				<input type="search" class="search" name="q" value="{SearchQuery}" placeholder="Search this Tumblr" autocomplete="on" />
-    				
-    				<input type="submit" value="Find" />
-				</form>
+      
+          {/block:Posts}
+          <footer>
+            {block:Pagination}
+            <nav id="pagination">
+             <ul>
+              {block:PreviousPage}<li class="left"><a rel="prev" href="{PreviousPage}">{lang:Previous page}</a></li>{/block:PreviousPage}
+              {block:NextPage}<li class="right"><a rel="next" href="{NextPage}">{lang:Next page}</a></li>{/block:NextPage}
+              <li>{lang:Page CurrentPage of TotalPages}</li>
+            </ul>
+            </nav>
+            {/block:Pagination}
 
-			</div>
-			
-			<div class="credit">
-				<p><a href="http://www.tumblr.com/theme/11568">SemanticTheme for Tumblr</a> developed by <a href="http://mhudack.com/">Mike Hudack</a> and <a href="http://github.com/mhudack/SemanticTheme">available on GitHub</a>.</p>
-			</div>
-			
-		</footer>
-		
-	</body>
+            <details>{text:Footer}</details>
+          </footer>
+        </div>
+
+        <aside class="right" id="sidebar">
+          <!-- <form action="/search" method="get">
+            <input type="search" class="search" name="q" value="{SearchQuery}" placeholder="Search this Tumblr" autocomplete="on" />
+            <input type="submit" value="Find" />
+          </form> -->
+          <section class="box">
+           <h3>R&D Projects</h3>
+           {text:Projects List}
+          </section>
+          <section class="box">
+           <h3>More Info</h3>
+           {text:More Info}
+          </section>
+        </aside>
+      </div>
+    </div>
+  </body>
 </html>

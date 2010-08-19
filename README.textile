@@ -1,0 +1,12 @@
+h1. Template 
+
+Tumblr theme template for for Rocketboom R&D. Forked from mhudack/SemanticTheme.
+
+
+h4. Usage
+
+Released under GPL license by Rocketboom. More info: http://www.gnu.org/licenses/gpl.html
+
+http://dev.rocketbom.com
+http://twitter.com/rocketboomdev
+http://github.com/rocketboom
